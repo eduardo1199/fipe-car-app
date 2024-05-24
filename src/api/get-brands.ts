@@ -1,6 +1,7 @@
 'use server'
 
-import { Brand } from "context/fipe-car-context";
+import { Brand } from "hooks/use-brands";
+
 import { api } from "lib/axios";
 
 export async function getBrands() {

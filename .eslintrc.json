@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "@eduardo1199/eslint-config",
+    "next"
+  ]
+}

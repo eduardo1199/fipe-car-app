@@ -1,6 +1,6 @@
 'use server'
 
-import { Model } from "context/fipe-car-context";
+import { Model } from "hooks/use-models";
 import { api } from "lib/axios";
 
 interface GetModelsParams {

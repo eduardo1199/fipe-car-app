@@ -1,6 +1,6 @@
 {
   "extends": [
     "@eduardo1199/eslint-config",
-    "next"
+    "eslint-config-next"
   ]
 }

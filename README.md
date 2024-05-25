@@ -16,7 +16,7 @@ Necessário node version.
 Exec:
 
 <aside>
-💡 npm run install && npm run dev
+💡 npm install && npm run dev
 
 </aside>
 

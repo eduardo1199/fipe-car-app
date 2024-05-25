@@ -6,9 +6,9 @@ import { ZodError, z } from "zod";
 import { toast } from "react-toastify";
 import { validateFormFipeCarSchema } from "schemas/validate-schema-form";
 
-import { Brand, useBrands } from "hooks/use-brands";
-import { Model, useModels } from "hooks/use-models";
-import { YearCar, useYearsCars } from "hooks/use-years-cars";
+import { Brand } from "hooks/use-brands";
+import { Model } from "hooks/use-models";
+import { YearCar } from "hooks/use-years-cars";
 
 
 interface Car {
@@ -17,18 +17,13 @@ interface Car {
   year: YearCar | null;
 }
 
-interface FipeCarContext {
-  brands: Brand[]
-  models: Model[]
-  yearsCars: YearCar[]
+export interface FipeCarContext {
   handleSelectBrand: (value: Brand | null) => void;
   handleSelectYear: (value: YearCar | null) => void;
   handleSelectModel: (value: Model | null) => void;
   fipeCar: Car;
   handleSubmitSearch: (FormEvent: FormEvent) => void; 
-  isLoadingBrands: boolean
-  isLoadingModels: boolean
-  isLoadingYearsCars: boolean
+  errorsFields: { [key: string]: string | undefined }
 }
 
 interface FipeCardContextProviderProps {
@@ -45,17 +40,9 @@ const initialStateFipeCar: Car = {
 
 export function FipeCarContextProvider({ children }: FipeCardContextProviderProps) {
   const [fipeCar, setFipeCar] = useState(initialStateFipeCar)
+  const [errorsFields, setErrorsFields] = useState<{ [key: string]: string | undefined }>({})
 
   const router = useRouter()
-
-  const { brands, isLoadingBrands } = useBrands()
-  const { models, isLoadingModels } = useModels({
-    brandCode: fipeCar.brand?.codigo ?? null,
-  })
-  const { yearsCars, isLoadingYearsCars } = useYearsCars({
-    brandCode: fipeCar.brand?.codigo ?? null,
-    modelCode: fipeCar.model?.codigo ?? null,
-  })
   
   function handleSelectBrand(value: Brand | null) {
     const setValueBrand: Car = {
@@ -64,6 +51,8 @@ export function FipeCarContextProvider({ children }: FipeCardContextProviderProp
       year: null
     }
 
+    
+    setErrorsFields({})
     setFipeCar(setValueBrand)
   }
 
@@ -74,6 +63,7 @@ export function FipeCarContextProvider({ children }: FipeCardContextProviderProp
     }
 
     setFipeCar(setValueBrand)
+    setErrorsFields({})
   }
 
   function handleSelectModel(value: Model | null) {
@@ -84,6 +74,7 @@ export function FipeCarContextProvider({ children }: FipeCardContextProviderProp
     }
 
     setFipeCar(setValueBrand)
+    setErrorsFields({})
   }
 
   function handleSubmitSearch(event: FormEvent) {
@@ -95,6 +86,19 @@ export function FipeCarContextProvider({ children }: FipeCardContextProviderProp
       router.push(`/fipe-car/${brand.codigo}/${model.codigo}/${year.codigo}`)
     } catch (error) {
       if (error instanceof ZodError) {
+        error.issues.forEach((valueError) => {
+          const errorField = {
+            [valueError.path[0]]: valueError.message  
+          }
+          
+          setErrorsFields(prev => {
+            return {
+              ...prev,
+              ...errorField
+            }
+          })
+        })
+
         toast.error('Parece que há um campo obrigatório faltando. Preencha todos os campos para continuar a busca.')
       }
     }
@@ -103,18 +107,13 @@ export function FipeCarContextProvider({ children }: FipeCardContextProviderProp
 
   return (
     <FipeCarContext.Provider 
-      value={{ 
-        brands, 
-        models, 
-        yearsCars, 
+      value={{  
         handleSelectBrand, 
         handleSelectYear, 
         handleSelectModel, 
         fipeCar,
         handleSubmitSearch,
-        isLoadingBrands,
-        isLoadingModels,
-        isLoadingYearsCars
+        errorsFields,
       }}
     >
       {children}

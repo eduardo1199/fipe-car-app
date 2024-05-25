@@ -38,7 +38,7 @@ export default async function FipeCarPage({ params }: FipeCarPageParams) {
         <Typography variant="h3" fontWeight="bold">Tabela Fipe {Marca} {Modelo} {AnoModelo}</Typography>
       </Box>
       <Box padding="1rem 2rem" bgcolor="#42B48E" color="white" borderRadius={'50px'}>
-        <Typography variant='h5' fontWeight="bold">{Valor}</Typography>
+        <Typography variant='h5' fontWeight="bold" data-cy="value-fipe-car">{Valor}</Typography>
       </Box>
 
       <Typography variant='caption' color="#7B7B7B">Este é o preço de compra do veículo</Typography>

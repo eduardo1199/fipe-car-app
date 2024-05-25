@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import { CarForm } from '../components/car-form';
+import { CarForm } from 'components/car-form/car-form';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

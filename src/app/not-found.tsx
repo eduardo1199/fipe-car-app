@@ -1,9 +1,19 @@
+'use client'
+
 import Link from 'next/link'
 
 import { Box, Typography  } from '@mui/material'
 import { Mood } from '@mui/icons-material'
+import { ButtonNavigate } from 'components/button-navigate'
+import { useRouter } from 'next/navigation'
  
 export default function NotFound() {
+  const router = useRouter()
+
+  function reset() {
+    router.push('/')
+  }
+
   return (
     <Box 
       width="100vw"
@@ -20,7 +30,10 @@ export default function NotFound() {
         <Mood fontSize="large" color='inherit' />
       </Box>
 
-      <Link href="/">Clique aqui</Link>
+   
+      <ButtonNavigate onClick={reset} variant="contained">
+        <Typography>Clique Aqui</Typography>
+      </ButtonNavigate>
     </Box>
   )
 }

@@ -5,7 +5,7 @@ import { Box, Typography } from '@mui/material'
 import { SentimentVeryDissatisfied } from '@mui/icons-material'
  
 import { useRouter } from 'next/navigation'
-import { ButtonRetryError } from 'components/button-retry-error'
+import { ButtonNavigate } from 'components/button-navigate'
  
 export default function Error({
   error,
@@ -34,9 +34,9 @@ export default function Error({
         <SentimentVeryDissatisfied fontSize="large" color='inherit' />
       </Box>
 
-      <ButtonRetryError onClick={reset} variant='contained'>
+      <ButtonNavigate onClick={reset} variant='contained'>
         <Typography>Tente novamente</Typography>
-      </ButtonRetryError>
+      </ButtonNavigate>
 
       <Typography variant='caption' color="#7B7B7B">Algum erro interno do servidor ou busca não encontrada! Tente novamente com outros valores</Typography>
     </Box>

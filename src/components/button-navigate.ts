@@ -2,7 +2,7 @@ import { Button } from '@mui/material'
 
 import { styled } from '@mui/material/styles';
 
-export const ButtonRetryError = styled(Button)({
+export const ButtonNavigate = styled(Button)({
   padding: '0.5rem 2rem',
   backgroundColor: '#5822AB',
   '&:hover': {

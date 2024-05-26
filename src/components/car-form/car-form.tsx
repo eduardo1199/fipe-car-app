@@ -103,7 +103,7 @@ export function CarForm() {
               isOptionEqualToValue={(option, value) => option.codigo === value.codigo}
               value={fipeCar.year}
               loading={isLoadingYearsCars}
-              loadingText={'Carregando anos dos do modelo...'}
+              loadingText={'Carregando anos do modelo...'}
               fullWidth
               data-cy="yearsCars"
             />

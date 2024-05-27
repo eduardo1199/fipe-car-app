@@ -45,6 +45,5 @@ export function useModels({ brandCode }: UseModelsParams) {
   return {
     models,
     isLoadingModels,
-    setModels
   }
 }

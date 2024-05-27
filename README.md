@@ -221,7 +221,6 @@ export function useModels({ brandCode }: UseModelsParams) {
   return {
     models,
     isLoadingModels,
-    setModels
   }
 }
 ```
@@ -263,7 +262,6 @@ export function useYearsCars({ brandCode, modelCode }: UseYearsCarsParams) {
 
   return {
     yearsCars,
-    setYearsCars,
     isLoadingYearsCars
   }
 }
